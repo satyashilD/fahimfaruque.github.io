@@ -52,27 +52,7 @@
             }
         });
     </script>
-    <script>
-        document.getElementById('submit').addEventListener('click', async () => {
-          const drug1 = document.getElementById('drug1').value;
-          const drug2 = document.getElementById('drug2').value;
-          const url = `https://<your-ngrok-url>/interactions?drug1=${drug1}&drug2=${drug2}`;
-      
-          const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          });
-      
-          if (!response.ok) {
-            console.error(`Error: ${response.statusText}`);
-          } else {
-            const result = await response.json();
-            document.getElementById('output').innerText = JSON.stringify(result, null, 2);
-          }
-        });
-      </script>
+
       
 </body>
 </html>
