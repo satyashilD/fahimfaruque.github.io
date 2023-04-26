@@ -22,7 +22,7 @@
     document.getElementById('submit').addEventListener('click', async () => {
       const drug1 = document.getElementById('drug1').value;
       const drug2 = document.getElementById('drug2').value;
-      const url = `https://5a8b-20-124-214-182.ngrok-free.app/interactions?drug1=${drug1}&drug2=${drug2}`;
+      const url = `https://4e6a-20-124-214-182.ngrok-free.app/interaction.py?drug1=${drug1}&drug2=${drug2}`;
   
       const response = await fetch(url, {
         method: 'POST',
