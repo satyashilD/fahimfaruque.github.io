@@ -1,58 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drug Interaction Checker</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drug Interaction Checker</title>
 </head>
 <body>
-    <h1>Drug Interaction Checker</h1>
-    <form id="drug-form">
-        <label for="drug1">Drug 1:</label>
-        <input type="text" id="drug1" name="drug1" required>
-        <br><br>
-        <label for="drug2">Drug 2:</label>
-        <input type="text" id="drug2" name="drug2" required>
-        <br><br>
-        <button type="submit">Check Interactions</button>
-    </form>
-    <div id="results">
-        <!-- Interaction results will be displayed here -->
-    </div>
+  <h1>Drug Interaction Checker</h1>
+  <form>
+    <label for="drug1">Drug 1:</label>
+    <input type="text" id="drug1" name="drug1" required>
+    <br>
+    <label for="drug2">Drug 2:</label>
+    <input type="text" id="drug2" name="drug2" required>
+    <br>
+    <button type="button" id="submit">Check Interactions</button>
+  </form>
+  <pre id="output"></pre>
 
-    <script>
-        const form = document.getElementById('drug-form');
-        const resultsDiv = document.getElementById('results');
+  <script>
+    document.getElementById('submit').addEventListener('click', async () => {
+      const drug1 = document.getElementById('drug1').value;
+      const drug2 = document.getElementById('drug2').value;
+      const url = `https://3f87-74-235-14-29.ngrok-free.app/interactions?drug1=${drug1}&drug2=${drug2}`;
 
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
-            const drug1 = document.getElementById('drug1').value;
-            const drug2 = document.getElementById('drug2').value;
-            const url = `https://3f87-74-235-14-29.ngrok-free.app/interactions?drug1=${drug1}&drug2=${drug2}`;
-
-            try {
-                const response = await fetch(url, { method: 'POST' });
-                const data = await response.json();
-
-                if (data.error) {
-                    resultsDiv.innerHTML = `<p>Error: ${data.error}</p>`;
-                } else if (data.interactions.length === 0) {
-                    resultsDiv.innerHTML = "<p>No interactions found.</p>";
-                } else {
-                    let resultHTML = "<ul>";
-                    data.interactions.forEach(interaction => {
-                        resultHTML += `<li>${interaction.patient_friendly_explanation}</li>`;
-                    });
-                    resultHTML += "</ul>";
-                    resultsDiv.innerHTML = resultHTML;
-                }
-            } catch (error) {
-                resultsDiv.innerHTML = `<p>Error: ${error.message}</p>`;
-            }
-        });
-    </script>
-
-      
+      if (!response.ok) {
+        console.error(`Error: ${response.statusText}`);
+      } else {
+        const result = await response.json();
+        document.getElementById('output').innerText = JSON.stringify(result, null, 2);
+      }
+    });
+  </script>
 </body>
 </html>
