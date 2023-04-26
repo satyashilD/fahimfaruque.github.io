@@ -4,10 +4,27 @@
     <title>My Input Form</title>
   </head>
   <body>
-    <form action="/run_function" method="POST">
+    <form action="" method="POST">
       <label for="input">Enter input:</label>
       <input type="text" id="input" name="input"><br><br>
       <input type="submit" value="Submit">
     </form>
+    <div id="result"></div>
+    <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(function() {
+        $('form').on('submit', function(e) {
+          e.preventDefault();
+          $.ajax({
+            type: 'POST',
+            url: '/',
+            data: $('form').serialize(),
+            success: function(data) {
+              $('#result').html(data.result);
+            }
+          });
+        });
+      });
+    </script>
   </body>
 </html>
