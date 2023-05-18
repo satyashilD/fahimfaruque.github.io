@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>String Chunker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            resize: vertical;
+        }
+
+        .output {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        .output label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        .chunk-box {
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>String Chunker</h1>
+
+        <div>
+            <label for="input-text">Enter a long string:</label>
+            <textarea id="input-text"></textarea>
+        </div>
+
+        <div>
+            <button onclick="processString()">Process</button>
+        </div>
+
+        <div class="output">
+            <label>Resulting Chunks:</label>
+            <div id="chunk-boxes"></div>
+        </div>
+    </div>
+
+    <script>
+        function breakStringIntoChunks(longString, chunkSize) {
+            const chunks = [];
+            while (longString.length > chunkSize) {
+                const breakIndex = findClosestParagraphBreak(longString, chunkSize);
+                const chunk = longString.substring(0, breakIndex);
+                chunks.push(chunk);
+                longString = longString.substring(breakIndex);
+            }
+            chunks.push(longString);  // Append the remaining part of the string
+            return chunks;
+        }
+
+        function findClosestParagraphBreak(text, chunkSize) {
+            if (text.length <= chunkSize) {
+                return text.length;
+            }
+
+            // Find the closest paragraph break before the chunk size
+            let index = chunkSize;
+            while (index >= 0) {
+                if (text[index] === '\n') {
+                    return index + 1;
+                }
+                index -= 1;
+            }
+
+            // If no paragraph break found, split at the chunk size
+            return chunkSize;
+        }
+
+        function processString() {
+            const longString = document.getElementById('input-text').value.trim();
+            const chunkSize = 10000;  // Specify your desired chunk size here
+
+            const chunks = breakStringIntoChunks(longString, chunkSize);
+
+            const chunkBoxes = document.getElementById('chunk-boxes');
+            chunkBoxes.innerHTML = '';  // Clear existing chunk boxes, if any
+
+            for (let i = 0; i < chunks.length; i++) {
+                const chunk = chunks[i];
+                const chunkBox = document.createElement('div');
+                chunkBox.className = 'chunk-box';
+                chunkBox.innerHTML = `<label>Chunk ${i + 1}:</label><br>${chunk}`;
+                chunkBoxes.appendChild(chunkBox);
+            }
+        }
+    </script>
+</body>
+</html>
