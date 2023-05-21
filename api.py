@@ -88,7 +88,7 @@ def display_interactions(interaction_data):
             print(f"Patient-friendly explanation: {patient_friendly_explanation}\n")
             return patient_friendly_explanation
 
-
+#main function
 def lambda_handler(event, context):
     print(event)
     try:
