@@ -40,10 +40,10 @@ jobs:
         source: './webpages'
         dest: 's3://rxchat.com'
         flags: --recursive
-    
-    - run: add-apt-repository ppa:deadsnakes/ppa && apt-get update -y
-    - run: apt-get install -y poppler-utils
-    - run: apt-get install -y python3.8
+    - name: setup python 3.8
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.8' 
     - name: Use Node.js '19.x'
       uses: actions/setup-node@v3
       with:
