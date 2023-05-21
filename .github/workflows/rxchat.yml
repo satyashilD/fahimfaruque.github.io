@@ -41,10 +41,10 @@ jobs:
         dest: 's3://rxchat.com'
         flags: --recursive
     
-    - name: Use Node.js '14.x'
+    - name: Use Node.js '18.x'
       uses: actions/setup-node@v3
       with:
-        node-version: '14.x'
+        node-version: '18.x'
     - run: npm ci
     - name: Install Plugin and Deploy
       uses: serverless/github-action@v3.2
