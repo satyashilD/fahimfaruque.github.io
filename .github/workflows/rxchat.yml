@@ -40,3 +40,16 @@ jobs:
         source: './webpages'
         dest: 's3://rxchat.com'
         flags: --recursive
+    
+    - name: Use Node.js '14.x'
+      uses: actions/setup-node@v3
+      with:
+        node-version: '14.x'
+    - run: npm ci
+    - name: serverless deploy
+      uses: serverless/github-action@v3.2
+      with:
+        args: deploy
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
