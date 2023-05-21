@@ -49,7 +49,7 @@ jobs:
     - name: Install Plugin and Deploy
       uses: serverless/github-action@v3.2
       with:
-        args: -c "serverless plugin install --name serverless-python-requirements && serverless deploy"
+        args: -c "python3.9 -m pip install --user --upgrade pip && serverless plugin install --name serverless-python-requirements && serverless deploy"
         entrypoint: /bin/sh
     # - name: serverless deploy
     #   uses: serverless/github-action@v3.2
