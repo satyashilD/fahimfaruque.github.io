@@ -1,0 +1,41 @@
+name: 'Rxchat'
+
+on:
+  push:
+    branches: [ "satya" ]
+#   pull_request:
+
+# permissions:
+#   contents: read
+
+jobs:
+  rxchat:
+    name: 'setup runner'
+    runs-on: ubuntu-latest
+    environment: dev
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    # Checkout the repository to the GitHub Actions runner
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+          aws-region: ap-south-1
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+    - name: Copy a folder to s3
+      uses: prewk/s3-cp-action@v2
+      with:
+        # aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        # aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        source: './webpages'
+        dest: 's3://rxchat.com'
+        flags: --recursive
