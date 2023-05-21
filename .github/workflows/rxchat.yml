@@ -57,20 +57,3 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         STAGE: dev
-
-
-    # - name: setup python 3.8
-    #   uses: actions/setup-python@v4
-    #   with:
-    #     python-version: '3.8' 
-    # - name: Use Node.js '19.x'
-    #   uses: actions/setup-node@v3
-    #   with:
-    #     node-version: '19.x'
-    # - run: npm ci
-    # - name: Install Plugin and Deploy
-    #   uses: serverless/github-action@master
-    #   with:
-    #     args: -c "serverless plugin install --name serverless-python-requirements && serverless deploy"
-    #     entrypoint: /bin/sh
-    

@@ -5,6 +5,14 @@ frameworkVersion: '3'
 provider:
   name: aws
   runtime: python3.8
+  iam:
+    role:
+      name: rxchat-service-lambda
+      statements:
+        # Allow functions to get secret value
+        - Effect: Allow
+          Action: 'secretsmanager:GetSecretValue'
+          Resource: '*'
 
 plugins:
   - serverless-python-requirements
@@ -20,6 +28,7 @@ functions:
   hello:
     handler: api.lambda_handler
     name: drug-interaction
+    role: rxchat-service-lambda
     events: # All events associated with this function
       - http: 'GET /'
       - http: 'POST /'
