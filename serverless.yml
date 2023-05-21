@@ -19,7 +19,7 @@ package:
 functions:
   hello:
     handler: api.lambda_handler
-    name: test-bot
+    name: drug-interaction
     events: # All events associated with this function
       - http: 'GET /'
       - http: 'POST /'
