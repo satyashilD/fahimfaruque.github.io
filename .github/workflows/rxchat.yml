@@ -57,6 +57,8 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         STAGE: dev
+<<<<<<< HEAD
+=======
 
 
     # - name: setup python 3.8
@@ -74,3 +76,4 @@ jobs:
     #     args: -c "serverless plugin install --name serverless-python-requirements && serverless deploy"
     #     entrypoint: /bin/sh
     
+>>>>>>> 0ac7470abfa02ee8235ecb25744bdfc254be52ae
