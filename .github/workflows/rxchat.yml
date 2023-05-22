@@ -2,7 +2,7 @@ name: 'Rxchat'
 
 on:
   push:
-    branches: [ "satya" ]
+    branches: [ "satya","main" ]
 #   pull_request:
 
 # permissions:
