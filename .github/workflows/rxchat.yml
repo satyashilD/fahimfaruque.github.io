@@ -37,7 +37,7 @@ jobs:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         source: './webpages'
-        dest: 's3://rxchat.com'
+        dest: 's3://www.rxchat.app'
         flags: --recursive
     
     - name: Setup Node
