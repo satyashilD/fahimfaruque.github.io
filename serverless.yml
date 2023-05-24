@@ -22,8 +22,23 @@ functions:
     name: drug-interaction
     role: rxchatRole
     events: # All events associated with this function
-      - http: 'GET /'
-      - http: 'POST /'
+      - http:
+          path: 'interaction/'
+          method: POST
+      - http: 
+          path: 'interaction/'
+          method: GET
+  hello2:
+    handler: api.lambda_handler
+    name: drug-interaction-2
+    role: rxchatRole
+    events: # All events associated with this function
+      - http:
+          path: 'interaction2/'
+          method: POST
+      - http: 
+          path: 'interaction2/'
+          method: GET
 
 resources:
   Resources:
